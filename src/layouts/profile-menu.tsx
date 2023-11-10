@@ -12,18 +12,18 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const menuItems = [
-  {
-    name: 'My Profile',
-    href: routes.profile,
-  },
+  // {
+  //   name: 'My Profile',
+  //   href: routes.profile,
+  // },
   {
     name: 'Account Settings',
     href: routes.forms.profileSettings,
   },
-  {
-    name: 'Activity Log',
-    href: '#',
-  },
+  // {
+  //   name: 'Activity Log',
+  //   href: '#',
+  // },
 ];
 
 function DropdownMenu() {

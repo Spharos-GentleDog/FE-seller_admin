@@ -130,25 +130,25 @@ export default function ProfileSettingsView({
           return (
             <>
               <ProfileHeader
-                title="Olivia Rhye"
-                description="Update your photo and personal details."
+                title="브랜드 이름"
+                description="브랜드 설명"
               >
-                <div className="w-full sm:w-auto md:ms-auto">
+                {/* <div className="w-full sm:w-auto md:ms-auto">
                   <Link href={routes.profile}>
                     <Button
                       tag="span"
                       className="dark:bg-gray-100 dark:text-white dark:focus:bg-gray-100"
                     >
-                      View Profile
+                      미리보기
                     </Button>
                   </Link>
-                </div>
+                </div> */}
               </ProfileHeader>
 
               <div className="mx-auto w-full max-w-screen-2xl">
                 <HorizontalFormBlockWrapper
-                  title="Name"
-                  titleClassName="text-base font-medium"
+                  title="브랜"
+                  titleClassName="text"
                 >
                   <Input
                     className="col-span-full"
@@ -161,7 +161,7 @@ export default function ProfileSettingsView({
                 </HorizontalFormBlockWrapper>
 
                 <HorizontalFormBlockWrapper
-                  title="Website"
+                  title="홈페이지"
                   titleClassName="text-base font-medium"
                 >
                   <Input

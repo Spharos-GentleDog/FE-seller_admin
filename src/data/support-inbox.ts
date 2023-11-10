@@ -592,7 +592,7 @@ export const messages = [
   {
     id: '5902575859',
     selected: false,
-    title: 'Modern Rubber Cheese',
+    title: '환불가능한 부분일까요?',
     firstName: 'Clinton',
     lastName: 'Ullrich',
     email: 'Ivah.Gerhold79@yahoo.com',
@@ -601,7 +601,7 @@ export const messages = [
     company: 'Stroman LLC',
     markedAsRead: true,
     summary:
-      'Repudiandae facilis optio quas hic est saepe ratione. Occaecati quod illum odio ducimus est.',
+      '옷에 이정도의 이염이 있으면 환불 가능한가요?',
     description:
       'nihil sapiente inventore eius harum cupiditate itaque provident quo ipsum similique veniam ea aspernatur ad aspernatur autem atque porro occaecati eos magni rerum minima facere maiores delectus deleniti minima deserunt esse aliquid architecto itaque nesciunt veniam recusandae quo ut atque inventore enim consectetur alias id eius eaque beatae ex dolorem nemo nihil iusto quis excepturi eius nobis qui ab expedita ullam tempora maxime aliquid rerum reiciendis quae vero soluta nobis numquam aperiam tempora soluta dignissimos sunt quos esse laboriosam adipisci explicabo doloribus dolore quos facere quas facilis et provident eos officiis veritatis qui doloremque quis magnam perspiciatis dolorem dolores tempora est molestias odit voluptates accusamus possimus magnam quod repellendus nam tenetur quo accusamus dolorum voluptas ipsa officia dolor ut optio dicta accusantium porro tempora porro nihil nostrum nesciunt dignissimos assumenda blanditiis pariatur expedita distinctio ea maiores cupiditate cupiditate id quia eius id quod vel voluptatum perferendis ipsum officia quisquam modi reprehenderit sunt a occaecati quae voluptas et illum mollitia reiciendis vero illum similique molestiae',
     date: new Date('2023-06-06T04:45:08.152Z'),

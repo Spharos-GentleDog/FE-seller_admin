@@ -16,7 +16,7 @@ const menuItems = [
     value: '/forms/profile-settings',
   },
   {
-    label: '샵 관리',
+    label: '브랜드정보',
     value: '/forms/profile-settings/profile',
   },
   {
