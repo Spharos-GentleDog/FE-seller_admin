@@ -30,11 +30,11 @@ export const supportNavItems = [
     label: '완료한 상담',
     count: 1603,
   },
-  {
-    value: 'chat',
-    label: '실시간 상담',
-    count: 991,
-  },
+  // {
+  //   value: 'chat',
+  //   label: '실시간 상담',
+  //   count: 991,
+  // },
 ];
 
 export const tabAtom = atom(supportNavItems[0].value);

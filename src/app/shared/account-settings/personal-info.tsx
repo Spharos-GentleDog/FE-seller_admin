@@ -173,17 +173,17 @@ export default function PersonalInfoView() {
                   titleClassName="text-base font-medium"
                 >
                   <Input
-                    placeholder="성"
+                    placeholder=""
                     {...register('first_name')}
                     error={errors.first_name?.message}
                     className="flex-grow"
                   />
-                  <Input
+                  {/* <Input
                     placeholder="이름"
                     {...register('last_name')}
                     error={errors.last_name?.message}
                     className="flex-grow"
-                  />
+                  /> */}
                 </HorizontalFormBlockWrapper>
 
                 <HorizontalFormBlockWrapper
@@ -196,7 +196,7 @@ export default function PersonalInfoView() {
                       <PiEnvelopeSimple className="h-6 w-6 text-gray-500" />
                     }
                     type="email"
-                    placeholder="@gmail.com"
+                    placeholder="@"
                     {...register('email')}
                     error={errors.email?.message}
                   />
@@ -281,7 +281,7 @@ export default function PersonalInfoView() {
                 </HorizontalFormBlockWrapper>
 
                 <HorizontalFormBlockWrapper
-                  title="지역"
+                  title="회사주소"
                   titleClassName="text-base font-medium"
                 >
                   <Controller

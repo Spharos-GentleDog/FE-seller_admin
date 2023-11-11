@@ -15,6 +15,7 @@ import { ActionIcon } from '@/components/ui/action-icon';
 import TrashIcon from '@/components/icons/trash';
 import SelectLoader from '@/components/loader/select-loader';
 import { PiPlusBold } from 'react-icons/pi';
+import { Checkbox } from '@/components/ui/checkbox';
 const Select = dynamic(() => import('@/components/ui/select'), {
   ssr: false,
   loading: () => <SelectLoader />,
@@ -58,6 +59,13 @@ export default function ProductVariants({ className }: { className?: string }) {
               />
             )}
           />
+          <Checkbox
+          type="text"
+          label="옵션값"
+          placeholder="150.00"
+          className="flex-grow"
+          prefix={'{label}'}
+          {...register(`productVariants.${index}.value`)}/>
           <Input
             type="text"
             label="옵션값"
@@ -67,7 +75,7 @@ export default function ProductVariants({ className }: { className?: string }) {
             {...register(`productVariants.${index}.value`)}
           />
           {fields.length > 1 && (
-            <ActionIcon
+            <ActionIcon 
               onClick={() => remove(index)}
               variant="flat"
               className="mt-7 shrink-0"

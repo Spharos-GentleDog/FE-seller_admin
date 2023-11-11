@@ -31,6 +31,9 @@ export const routes = {
     createTemplate: '/support/templates/create',
     viewTemplate: (id: string) => `/support/templates/${id}`,
     editTemplate: (id: string) => `/support/templates/${id}/edit`,
+    usermanagement: '/support/usermanagement',
+    viewUsermanagement: (id: string) => `/support/usermanagement/${id}`,
+    editUsermanagement: (id: string) => `/support/usermanagement/${id}/edit`,
   },
   logistics: {
     dashboard: '/logistics',

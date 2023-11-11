@@ -78,7 +78,7 @@ export default function ProductSummary({ className }: { className?: string }) {
         )}
       />
 
-      <Controller
+      {/* <Controller
         name="color"
         control={control}
         render={({ field: { onChange, value } }) => (
@@ -107,7 +107,7 @@ export default function ProductSummary({ className }: { className?: string }) {
           />
           
         )}
-      />
+      /> */}
 
       <Controller
         control={control}

@@ -14,7 +14,7 @@ export default function ProductPricing() {
         placeholder="ex.10"
         {...register('price')}
         error={errors.price?.message as string}
-        prefix={'$'}
+        prefix={'￦'}
         type="number"
       />
       <Input
@@ -22,7 +22,7 @@ export default function ProductPricing() {
         placeholder="ex.20"
         {...register('salePrice')}
         error={errors.salePrice?.message as string}
-        prefix={'$'}
+        prefix={'￦'}
         type="number"
       />
     </>

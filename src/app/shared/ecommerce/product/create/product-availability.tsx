@@ -9,13 +9,13 @@ const availability = [
     name: '판매중',
   },
   {
-    value: 'coming-soon',
-    name: 'Coming soon',
-  },
-  {
     value: 'offline',
-    name: '품절',
+    name: '판매중지',
   },
+  // {
+  //   value: 'offline',
+  //   name: '품절',
+  // },
 ];
 
 export default function ProductAvailability() {

@@ -59,7 +59,7 @@ export default function ShippingInfo({ className }: { className?: string }) {
         prefix={'￦'}
         type="number"
       />
-      <Controller
+      {/* <Controller
         name="locationBasedShipping"
         control={control}
         render={({ field: { value, onChange } }) => (
@@ -73,7 +73,7 @@ export default function ShippingInfo({ className }: { className?: string }) {
             handlerClassName="dark:bg-gray-400"
           />
         )}
-      />
+      /> */}
 
       {fields.map((item, index) => (
         <div key={item.id} className="col-span-full flex gap-4 xl:gap-7">
