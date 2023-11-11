@@ -1,10 +1,10 @@
 import { routes } from '@/config/routes';
 import PageHeader from '@/app/shared/page-header';
-import TemplatesTable from '@/app/shared/support/templates/table';
+import UsermanagementTable from '@/app/shared/support/usermanagement/table';
 import HeaderAction from '../header-action';
 
 const pageHeader = {
-  title: '판매자관리',
+  title: '유저관리',
   breadcrumb: [
     {
       href: routes.eCommerce.dashboard,
@@ -12,7 +12,7 @@ const pageHeader = {
     },
     {
       href: routes.support.dashboard,
-      name: '판매자',
+      name: '유저',
     },
     {
       name: '관리',
@@ -20,13 +20,13 @@ const pageHeader = {
   ],
 };
 
-export default function SupportTemplatesPage() {
+export default function SupportUsermanagementPage() {
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
         <HeaderAction title="template" />
       </PageHeader>
-      <TemplatesTable />
+      <UsermanagementTable />
     </>
   );
 }

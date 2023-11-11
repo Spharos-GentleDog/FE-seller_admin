@@ -94,6 +94,10 @@ export const menuItems = [
         name: '후기',
         href: routes.eCommerce.reviews,
       },
+      {
+        name: '후기관리',
+        href: routes.eCommerce.reviews,
+      },
       // {
       //   name: '삭제예정',
       //   href: routes.eCommerce.shop,
@@ -121,10 +125,14 @@ export const menuItems = [
         name: 'FAQ',
         href: routes.support.snippets,
       },
-      // {
-      //   name: 'Templates',
-      //   href: routes.support.templates,
-      // },
+      {
+        name: '판매자관리',
+        href: routes.support.templates,
+      },
+      {
+        name: '유저관리',
+        href: routes.support.usermanagement,
+      },
     ],
   },
   {
