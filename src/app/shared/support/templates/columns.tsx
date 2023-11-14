@@ -157,7 +157,9 @@ export const getColumns = ({
     dataIndex: 'status',
     key: 'status',
     width: 120,
-    render: (name: string) => name,
+    render: (status: string) => {
+        return status === '활동중' ? '활동중' : '탈퇴';
+    },
   },
   {
     title: <></>,

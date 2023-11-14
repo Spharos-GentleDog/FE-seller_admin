@@ -64,7 +64,11 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'lp2.hm.com'
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'gentledog.s3.ap-northeast-2.amazonaws.com',
+      },
     ],
   },
   env: {

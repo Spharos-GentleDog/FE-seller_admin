@@ -96,7 +96,7 @@ export const menuItems = [
       },
       {
         name: '후기관리',
-        href: routes.eCommerce.reviews,
+        href: routes.eCommerce.shop,
       },
       // {
       //   name: '삭제예정',

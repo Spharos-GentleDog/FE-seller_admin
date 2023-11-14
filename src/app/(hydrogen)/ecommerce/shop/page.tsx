@@ -15,42 +15,26 @@ const ShopFilters = dynamic(
 );
 
 const pageHeader = {
-  title: 'Shop',
+  title: '후기관리',
   breadcrumb: [
     {
       name: 'Home',
     },
     {
       href: routes.eCommerce.dashboard,
-      name: 'E-Commerce',
+      name: '후기',
     },
     {
-      name: 'Shop',
+      name: '관리',
     },
   ],
 };
 
-export default function ShopPage() {
-  const { openDrawer } = useDrawer();
-
+export default function ReviewsPage() {
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
-        <Button
-          className="mt-4 w-full cursor-pointer @lg:mt-0 @lg:w-auto dark:bg-gray-100 dark:text-white dark:active:bg-gray-100"
-          onClick={() =>
-            openDrawer({
-              view: <ShopFilters />,
-              placement: 'right',
-            })
-          }
-        >
-          <PiSliders className="me-1 h-4 w-4 rotate-90" />
-          Filters
-        </Button>
       </PageHeader>
-
-      <ProductFeed />
     </>
   );
 }

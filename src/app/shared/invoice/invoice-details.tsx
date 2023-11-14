@@ -9,7 +9,7 @@ const invoiceItems = [
   {
     id: '1',
     product: {
-      title: 'ChawkBazar Laravel Flutter Mobile App',
+      title: '대형견',
       description:
         'Along With Wordpress Themes & Plugins, We always try to use latest trending techs like React, Next Js, Gatsby Js, GraphQl, Shopify etc to make our products special.',
     },
@@ -20,7 +20,7 @@ const invoiceItems = [
   {
     id: '2',
     product: {
-      title: 'Borobazar React Next Grocery Template',
+      title: '소형견',
       description:
         'Our rich tech choice will help you to build high performance applications. We are also known to provide great customer supports to our customers.',
     },
@@ -31,7 +31,7 @@ const invoiceItems = [
   {
     id: '3',
     product: {
-      title: 'Superprops React Modern Landing Page Template',
+      title: '수수료',
       description:
         'Our rich tech choice will help you to build high performance applications. We are also known to provide great customer supports to our customers.',
     },
