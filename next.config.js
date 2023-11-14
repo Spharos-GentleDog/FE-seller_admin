@@ -77,5 +77,7 @@ module.exports = {
     AWS_REGION: process.env.AWS_REGION,
     AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    BASE_API_URL: process.env.BASE_API_URL,
   },
 };

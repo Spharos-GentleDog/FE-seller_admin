@@ -16,6 +16,7 @@ import HamburgerButton from '@/layouts/hamburger-button';
 import cn from '@/utils/class-names';
 import Logo from '@/components/logo';
 import Sidebar from './sidebar';
+import { useSession } from 'next-auth/react';
 
 function HeaderMenuRight() {
   return (
@@ -57,6 +58,9 @@ function HeaderMenuRight() {
 }
 
 export default function Header() {
+
+  const session = useSession();
+  console.log(session);
   const isMounted = useIsMounted();
   const windowScroll = useWindowScroll();
   return (

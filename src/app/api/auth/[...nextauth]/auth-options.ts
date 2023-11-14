@@ -1,8 +1,7 @@
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-// import { env } from '@/backupenv.mjs';
-import isEqual from 'lodash/isEqual';
+
 import { pagesOptions } from './pages-options';
 
 export const authOptions: NextAuthOptions = {
@@ -15,21 +14,13 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
-    async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.idToken as string,
-        },
-      };
+    async jwt({token, user}) {
+      return {...token, ...user}
     },
-    async jwt({ token, user }) {
-      if (user) {
-        // return user as JWT
-        token.user = user;
-      }
-      return token;
+
+    async session({ session, token }){
+      session.user = token as any;
+      return session;
     },
     async redirect({ url, baseUrl }) {
       const parsedUrl = new URL(url, baseUrl);
@@ -51,25 +42,30 @@ export const authOptions: NextAuthOptions = {
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid
-        const testUser = {
-          username: 'admin@admin.com',
-          password: 'admin',
-        };
+        
+        console.log('credentials', credentials)
 
+        
         if (
-          isEqual(testUser, {
-            username: credentials?.username,
-            password: credentials?.password,
-          })
+          credentials.username === 'jason@jason.com' && credentials.password === '123456'
         ) {
-          const result = {
-            id: '1',
-            name: 'Admin',
-            email: 'beat1103@gmail.com',
-            token: '123456789',
-            username: 'jason',
-            password: '123456',
+          console.log("Good")
+          const result: any = {
+            accessToken: '1abckdkakaldasdkdkdkdkdkd',
+            refreshToken: 'adsf;kjalsdkf;lkajsdfljiejoajsdf',
+            vendorEmail: 'beat1103@gmail.com',
+            brandName: 'gentledog',
+            brandLogoImageUrl: 'jason',
+            authorities: [
+              { authority: 'Admin' },
+            ],
           }
+          // const data = await fetch('http://localhost:8080/api/v1/auth/login', {
+          //   method: 'POST',
+          //   headers: {  'Content-Type': 'application/json' },
+          //   body: JSON.stringify(credentials),
+          // } as any)
+          // console.log('data', data)
           return result;
         }
         return null;
