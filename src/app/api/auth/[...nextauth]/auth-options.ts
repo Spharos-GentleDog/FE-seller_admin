@@ -9,15 +9,10 @@ export const authOptions: NextAuthOptions = {
   pages: {
     ...pagesOptions,
   },
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
   callbacks: {
     async jwt({token, user}) {
       return {...token, ...user}
     },
-
     async session({ session, token }){
       session.user = token as any;
       return session;
@@ -26,6 +21,10 @@ export const authOptions: NextAuthOptions = {
       const parsedUrl = new URL(url, baseUrl);
       if (parsedUrl.searchParams.has('callbackUrl')) {
         return `${baseUrl}${parsedUrl.searchParams.get('callbackUrl')}`;
+      }
+
+      if (parsedUrl.searchParams.has('signin')) {
+        return `${baseUrl}${parsedUrl.searchParams.get('signin')}`;
       }
       if (parsedUrl.origin === baseUrl) {
         return url;
@@ -39,35 +38,48 @@ export const authOptions: NextAuthOptions = {
       name: 'Credentials',
       credentials: {},
       async authorize(credentials: any) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid
         
         console.log('credentials', credentials)
+        const data:any = await fetch('https://gentledog-back.duckdns.org/api/v1/vendor/signin', {
+          method: 'POST',
+          headers: {  'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            vendorEmail: credentials.username,
+            password: credentials.password,
+          }),
+        });
 
-        
-        if (
-          credentials.username === 'jason@jason.com' && credentials.password === '123456'
-        ) {
+        const result:any = await data.json();
+        if (result.isSuccess) {
           console.log("Good")
-          const result: any = {
-            accessToken: '1abckdkakaldasdkdkdkdkdkd',
-            refreshToken: 'adsf;kjalsdkf;lkajsdfljiejoajsdf',
-            vendorEmail: 'beat1103@gmail.com',
-            brandName: 'gentledog',
-            brandLogoImageUrl: 'jason',
-            authorities: [
-              { authority: 'Admin' },
-            ],
+          console.log(result.result)
+          const res:any = {
+            accessToken: result.result.accessToken,
+            refreshToken: result.result.refreshToken,
+            vendorEmail: result.result.vendorEmail,
+            brandName: result.result.brandName,
+            brandLogoImageUrl: result.result.brandLogoImageUrl,
+            authorities: result.result.authorities,
           }
+        
+          // const result: any = {
+          //   accessToken: '1abckdkakaldasdkdkdkdkdkd',
+          //   refreshToken: 'adsf;kjalsdkf;lkajsdfljiejoajsdf',
+          //   vendorEmail: 'beat1103@gmail.com',
+          //   brandName: 'gentledog',
+          //   brandLogoImageUrl: 'jason',
+          //   authorities: [
+          //     { authority: 'Admin' },
+          //   ],
+          // }
           // const data = await fetch('http://localhost:8080/api/v1/auth/login', {
           //   method: 'POST',
           //   headers: {  'Content-Type': 'application/json' },
           //   body: JSON.stringify(credentials),
           // } as any)
           // console.log('data', data)
-          return result;
-        }
+          return res;
+        } 
         return null;
       },
     }),

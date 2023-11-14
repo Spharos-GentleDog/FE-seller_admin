@@ -6,13 +6,16 @@ import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Password } from '@/components/ui/password';
 import * as z from 'zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PiArrowRightBold } from 'react-icons/pi';
 import Link from 'next/link';
 import { routes } from '@/config/routes';
 import { Title, Text } from '@/components/ui/text';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { SubmitHandler } from 'react-hook-form';
+import { redirect, useSearchParams, useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { set } from 'lodash';
 
 const loginSchema = z.object({
   username: z.string().email({ message: 'Invalid username' }),
@@ -27,6 +30,10 @@ const initialValues: Login = {
 };
 
 export default function SignInForm() {
+
+  const query = useSearchParams();
+  const router = useRouter();
+  console.log(query.get('error'))
   //TODO: why we need to reset it here
   const [reset, setReset] = useState({});
   console.log(process.env.AWS_REGION)
@@ -38,6 +45,22 @@ export default function SignInForm() {
     });
     // setReset({ email: "", password: "", isRememberMe: false });
   };
+  useEffect(() => {
+    if (query.get('error') === 'CredentialsSignin') {
+      router.push('/signin?signin=error')
+    } 
+  },[query])
+
+  useEffect(() => {
+    if (query.get('signin') === 'error') {
+      setReset({ email: "", password: "", isRememberMe: false })
+      toast.error(
+        <Text>
+          Invalid username or password
+        </Text>
+      );
+    } 
+  },[query.get('signin')])
 
   return (
     <>
