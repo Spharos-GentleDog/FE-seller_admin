@@ -19,6 +19,8 @@ import Sidebar from './sidebar';
 import { useSession } from 'next-auth/react';
 
 function HeaderMenuRight() {
+  const session = useSession();
+  console.log(session)
   return (
     <div className="ms-auto grid shrink-0 grid-cols-3  items-center gap-2 text-gray-700 xs:gap-3 xl:gap-4">
       {/* <MessagesDropdown>
@@ -59,8 +61,6 @@ function HeaderMenuRight() {
 
 export default function Header() {
 
-  const session = useSession();
-  console.log(session);
   const isMounted = useIsMounted();
   const windowScroll = useWindowScroll();
   return (
