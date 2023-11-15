@@ -55,7 +55,7 @@ export default function PriceFilter({
         </Title>
         <div className="mb-3.5 flex items-center pt-5">
           <div className="flex items-center">
-            $
+          ￦
             <input
               type="number"
               value={price.min}
@@ -68,7 +68,7 @@ export default function PriceFilter({
           </div>
           -
           <div className="flex items-center ps-5">
-            $
+          ￦
             <input
               type="number"
               value={price.max}

@@ -150,7 +150,7 @@ export default function ProductDetailsSummery() {
           <div className="-mb-0.5 text-2xl font-semibold text-gray-900 lg:text-3xl">
             상품가격
           </div>
-          <del className="ps-1.5 font-medium text-gray-500">$220</del>
+          <del className="ps-1.5 font-medium text-gray-500">￦220</del>
           <div className="ps-1.5 text-red">(25% OFF)</div>
         </div>
         <div className="font-medium text-green-dark">

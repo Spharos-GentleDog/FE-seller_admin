@@ -11,7 +11,7 @@ const invoiceItems = [
     product: {
       title: '대형견',
       description:
-        'Along With Wordpress Themes & Plugins, We always try to use latest trending techs like React, Next Js, Gatsby Js, GraphQl, Shopify etc to make our products special.',
+        '대형견 카테고리에서 판매한 수입내역입니다',
     },
     quantity: 2,
     unitPrice: 100,
@@ -20,9 +20,9 @@ const invoiceItems = [
   {
     id: '2',
     product: {
-      title: '소형견',
+      title: '중형견',
       description:
-        'Our rich tech choice will help you to build high performance applications. We are also known to provide great customer supports to our customers.',
+        '중형견 카테고리에서 판매한 수입내역입니다',
     },
     quantity: 2,
     unitPrice: 100,
@@ -31,9 +31,20 @@ const invoiceItems = [
   {
     id: '3',
     product: {
+      title: '소형견',
+      description:
+        '소형견 카테고리에서 판매한 수입내역입니다',
+    },
+    quantity: 3,
+    unitPrice: 100,
+    total: 300,
+  },
+  {
+    id: '4',
+    product: {
       title: '수수료',
       description:
-        'Our rich tech choice will help you to build high performance applications. We are also known to provide great customer supports to our customers.',
+        '수수료 내역입니다',
     },
     quantity: 3,
     unitPrice: 100,
@@ -79,14 +90,14 @@ const columns = [
     dataIndex: 'unitPrice',
     key: 'unitPrice',
     width: 200,
-    render: (value: string) => <Text className="font-medium">${value}</Text>,
+    render: (value: string) => <Text className="font-medium">￦{value}</Text>,
   },
   {
     title: 'Total',
     dataIndex: 'total',
     key: 'total',
     width: 200,
-    render: (value: string) => <Text className="font-medium">${value}</Text>,
+    render: (value: string) => <Text className="font-medium">￦{value}</Text>,
   },
 ];
 
@@ -120,9 +131,9 @@ export default function InvoiceDetails() {
             rounded="md"
             className="mb-3 md:mb-2"
           >
-            지불
+            code
           </Badge>
-          <Title as="h6">INV - #246098</Title>
+          <Title as="h6">판매자 Email</Title>
           <Text className="mt-0.5 text-gray-500">Invoice Number</Text>
         </div>
       </div>
@@ -133,16 +144,16 @@ export default function InvoiceDetails() {
             From
           </Title>
           <Text className="mb-1.5 text-sm font-semibold uppercase">
-            REDQ, INC
+            GentleDog
           </Text>
-          <Text className="mb-1.5">Jerome Bell</Text>
+          <Text className="mb-1.5">https://gentledog.store</Text>
           <Text className="mb-1.5">
-            4140 Parker Rd. Allentown, <br /> New Mexico 31134
+          부산광역시 해운대구 APEC로 17 (우동) <br /> 리더스마크 4층
           </Text>
-          <Text className="mb-4 sm:mb-6 md:mb-8">(302) 555-0107</Text>
+          <Text className="mb-4 sm:mb-6 md:mb-8">1670-3038</Text>
           <div>
             <Text className="mb-2 text-sm font-semibold">Creation Date</Text>
-            <Text>Mar 22, 2013</Text>
+            <Text>Date</Text>
           </div>
         </div>
 
@@ -151,11 +162,11 @@ export default function InvoiceDetails() {
             Bill To
           </Title>
           <Text className="mb-1.5 text-sm font-semibold uppercase">
-            TRANSPORT LLC
+            Brand Name
           </Text>
           <Text className="mb-1.5">Albert Flores</Text>
           <Text className="mb-1.5">
-            2715 Ash Dr. San Jose, <br />
+            address <br />
             South Dakota 83475
           </Text>
           <Text className="mb-4 sm:mb-6 md:mb-8">(671) 555-0110</Text>
@@ -181,40 +192,39 @@ export default function InvoiceDetails() {
             as="h6"
             className="mb-1 text-xs font-semibold uppercase xs:mb-2 xs:text-sm"
           >
-            Notes
+            영수증
           </Title>
           <Text className="leading-[1.7]">
-            We appreciate your business. Should you need us to add VAT or extra
-            notes let us know!
+            본 정산서는 GentleDog에서 발행한 정산서로 법적 효력이 없음을 알려드립니다.
           </Text>
         </div>
         <div className=" w-full max-w-sm">
           <Text className="flex items-center justify-between border-b border-gray-200 pb-3.5 lg:pb-5">
-            Subtotal:{' '}
+            총 금액{' '}
             <Text as="span" className="font-semibold">
-              $700
+            ￦700
             </Text>
           </Text>
           <Text className="flex items-center justify-between border-b border-gray-200 py-3.5 lg:py-5">
-            Shipping:{' '}
+            배달료{' '}
             <Text as="span" className="font-semibold">
-              $142
+            ￦142
             </Text>
           </Text>
           <Text className="flex items-center justify-between border-b border-gray-200 py-3.5 lg:py-5">
-            Discount:{' '}
+            할인{' '}
             <Text as="span" className="font-semibold">
-              $250
+            ￦250
             </Text>
           </Text>
           <Text className="flex items-center justify-between border-b border-gray-200 py-3.5 lg:py-5">
-            Taxes:
+            수수료
             <Text as="span" className="font-semibold">
-              15%
+              10%
             </Text>
           </Text>
           <Text className="flex items-center justify-between pt-4 text-base font-semibold text-gray-900 lg:pt-5">
-            Total: <Text as="span">$659.5</Text>
+            Total <Text as="span">￦659.5</Text>
           </Text>
         </div>
       </div>
