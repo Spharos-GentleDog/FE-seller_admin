@@ -33,7 +33,7 @@ export default function CustomFields() {
             label="Custom Field Value"
             placeholder="custom field value"
             className="flex-grow"
-            {...register(`customFields.${index}.value`)}
+            {...register(`customFields.{index}.value`)}
           />
           {fields.length > 1 && (
             <ActionIcon

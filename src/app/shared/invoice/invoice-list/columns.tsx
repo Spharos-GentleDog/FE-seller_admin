@@ -161,7 +161,7 @@ export const getColumns = ({
     width: 200,
     render: (value: string) => (
       <Text className="font-medium text-gray-700 dark:text-gray-600">
-        ${value}
+        ￦{value}
       </Text>
     ),
   },

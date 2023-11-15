@@ -59,7 +59,7 @@ export default function HeaderAction({ title, className }: HeaderActionProps) {
           }
         >
           <PiFolderBold className="me-1.5 h-[17px] w-[17px]" />
-          New Folder
+          리스트 저장
         </Button>
         <Button
           className="w-full text-xs capitalize @lg:w-auto dark:bg-gray-100 dark:text-white dark:active:bg-gray-100 sm:text-sm"
@@ -71,7 +71,7 @@ export default function HeaderAction({ title, className }: HeaderActionProps) {
           }
         >
           <PiPlusBold className="me-1.5 h-[17px] w-[17px]" />
-          Create {title}
+           추가
         </Button>
       </div>
     </>
