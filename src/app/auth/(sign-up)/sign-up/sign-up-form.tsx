@@ -12,24 +12,30 @@ import * as z from 'zod';
 import { useState } from 'react';
 import { PiArrowRightBold } from 'react-icons/pi';
 import { routes } from '@/config/routes';
-
-type FormValues = {
-  firstName: string;
-  lastName?: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  isAgreed: boolean;
-};
+import { SellerSignUpType } from 'types/seller/seller';
+import { Textarea } from 'rizzui';
+import FileUploadImage from '@/app/shared/file-upload_image';
 
 const initialValues = {
-  firstName: '',
-  lastName: '',
-  email: '',
+  vendorEmail: '',
+  businessNumber: '',
   password: '',
   confirmPassword: '',
-  isAgreed: false,
+  mailOrderNumber: '',
+  brandName: '',
+  brandLogoImageUrl: '',
+  brandContent: '',
+  homepageUrl: '',
+  businessType: '',
+  companyName: '',
+  companyAddress: '',
+  openedAt: '',
+  vendorName: '',
+  callCenterNumber: '',
+  managerName: '',
+  managerPhoneNumber: ''
 };
+
 
 const signUpFormSchema = z.object({
   firstName: z.string().min(1, { message: 'First name is require' }),
@@ -63,20 +69,19 @@ const signUpFormSchema = z.object({
 export default function SignUpForm() {
   const [reset, setReset] = useState({});
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<SellerSignUpType> = (data) => {
     console.log(data);
     setReset({ ...initialValues, isAgreed: false });
   };
 
   return (
     <>
-      <Form<FormValues>
-        validationSchema={signUpFormSchema}
+      <Form<SellerSignUpType>
         resetValues={reset}
         onSubmit={onSubmit}
-        useFormProps={{
-          defaultValues: initialValues,
-        }}
+        // useFormProps={{
+        //   defaultValues: initialValues,
+        // }}
       >
         {({ register, formState: { errors } }) => (
           <div className="flex flex-col gap-x-4 gap-y-5 md:grid md:grid-cols-2 lg:gap-5">
@@ -88,8 +93,8 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               color="info"
               inputClassName="text-sm"
-              {...register('firstName')}
-              error={errors.firstName?.message}
+              {...register('brandName')}
+              error={errors.brandName?.message}
             />
             <Input
               type="text"
@@ -99,19 +104,20 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               color="info"
               inputClassName="text-sm"
-              {...register('lastName')}
-              error={errors.lastName?.message}
+              {...register('homepageUrl')}
+              error={errors.homepageUrl?.message}
             />
-            <Input
-              type="text"
+            <div className='col-span-2'>
+              <FileUploadImage label = "회사로고 이미지"/>
+            </div>
+            <Textarea
               size="lg"
               label="회사 상품소개 및 관련내용"
               // placeholder="Enter your last name"
-              className="[&>label>span]:font-medium"
+              className="[&>label>span]:font-medium col-span-2"
               color="info"
-              inputClassName="text-sm"
-              {...register('lastName')}
-              error={errors.lastName?.message}
+              {...register('brandContent')}
+              error={errors.brandContent?.message}
             />
             <Input
               type="text"
@@ -121,8 +127,8 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               color="info"
               inputClassName="text-sm"
-              {...register('lastName')}
-              error={errors.lastName?.message}
+              {...register('companyName')}
+              error={errors.companyName?.message}
             />
             <Input
               type="text"
@@ -132,8 +138,8 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your pin"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('businessNumber')}
+              error={errors.businessNumber?.message}
             />
             <Input
               type="text"
@@ -143,8 +149,8 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your add"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('companyAddress')}
+              error={errors.companyAddress?.message}
             />
             <Input
               type="text"
@@ -154,30 +160,30 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your name"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('managerName')}
+              error={errors.managerName?.message}
             />
-                        <Input
-              type="number"
+            <Input
+              type="text"
               size="lg"
               label="전화번호"
               className="[&>label>span]:font-medium"
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your number"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('callCenterNumber')}
+              error={errors.callCenterNumber?.message}
             />
-                        <Input
-              type="number"
+            <Input
+              type="text"
               size="lg"
               label="휴대전화"
               className="[&>label>span]:font-medium"
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your number"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('managerPhoneNumber')}
+              error={errors.managerPhoneNumber?.message}
             />
             <Input
               type="email"
@@ -187,12 +193,22 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your email"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('vendorEmail')}
+              error={errors.vendorEmail?.message}
             />
             <Password
               label="Password"
               placeholder="Enter your password"
+              size="lg"
+              className="[&>label>span]:font-medium"
+              color="info"
+              inputClassName="text-sm"
+              {...register('password')}
+              error={errors.password?.message}
+            />
+            <Password
+              label="Confirm Password"
+              placeholder="Enter your confirm password"
               size="lg"
               className="[&>label>span]:font-medium"
               color="info"
@@ -208,10 +224,10 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your pin"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('mailOrderNumber')}
+              error={errors.mailOrderNumber?.message}
             />
-                        <Input
+            <Input
               type="date"
               size="lg"
               label="개업일자"
@@ -219,10 +235,10 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your date"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('openedAt')}
+              error={errors.openedAt?.message}
             />
-                        <Input
+            <Input
               type="text"
               size="lg"
               label="사업체 분류"
@@ -230,44 +246,9 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your category"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('businessType')}
+              error={errors.businessType?.message}
             />           
-            {/* <Password
-              label="Confirm Password"
-              placeholder="Enter confirm password"
-              size="lg"
-              className="[&>label>span]:font-medium"
-              color="info"
-              inputClassName="text-sm"
-              {...register('confirmPassword')}
-              error={errors.confirmPassword?.message}
-            /> */}
-            <div className="col-span-2 flex items-start ">
-              <Checkbox
-                {...register('isAgreed')}
-                className="[&>label>span]:font-medium [&>label]:items-start"
-                label={
-                  <>
-                    마케팅 및 광고성 활용 수신동의{' '}
-                    <Link
-                      href="/"
-                      color='red'
-                      className="font-medium text-blue transition-colors hover:underline"
-                    >
-                      수신
-                    </Link>{' '}
-                    &{' '}
-                    <Link
-                      href="/"
-                      className="font-medium text-blue transition-colors hover:underline"
-                    >
-                      동의
-                    </Link>
-                  </>
-                }
-              />
-            </div>
             <Button
               size="lg"
               color="DEFAULT"
