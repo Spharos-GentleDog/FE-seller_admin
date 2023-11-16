@@ -14,49 +14,59 @@ import { PiArrowRightBold } from 'react-icons/pi';
 import { routes } from '@/config/routes';
 
 type FormValues = {
-  firstName: string;
-  lastName?: string;
+  brandName: string;
+  officialWebsite: string;
+  companyProductInfo: string;
+  companyName: string;
+  businessNumber: string;
+  businessAddress: string;
+  representativeName: string;
+  phoneNumber: string;
+  mobilePhoneNumber: string;
   email: string;
   password: string;
+  businessLicenseNumber: string;
   confirmPassword: string;
+  openingDate: string;
+  businessCategory: string;
   isAgreed: boolean;
 };
 
 const initialValues = {
-  firstName: '',
-  lastName: '',
+  brandName: '',
+  officialWebsite: '',
+  companyProductInfo: '',
+  companyName: '',
+  businessNumber: '',
+  businessAddress: '',
+  representativeName: '',
+  phoneNumber: '',
+  mobilePhoneNumber: '',
   email: '',
   password: '',
+  businessLicenseNumber: '',
   confirmPassword: '',
+  openingDate: '',
+  businessCategory: '',
   isAgreed: false,
 };
 
 const signUpFormSchema = z.object({
-  firstName: z.string().min(1, { message: 'First name is require' }),
-  lastName: z.string().optional(),
-  email: z.string().email({ message: 'Invalid email address' }),
-  password: z
-    .string()
-    .min(8, { message: 'Password must be 8 or more characters long' })
-    .max(32, { message: 'Password must be a maximum of 32 characters long' })
-    .regex(new RegExp('.*[A-Z].*'), {
-      message: 'At least one uppercase character',
-    })
-    .regex(new RegExp('.*[a-z].*'), {
-      message: 'At least one lowercase character',
-    })
-    .regex(new RegExp('.*\\d.*'), { message: 'At least one number' }),
-  confirmPassword: z
-    .string()
-    .regex(new RegExp('.*[A-Z].*'), {
-      message: 'At least one uppercase character',
-    })
-    .regex(new RegExp('.*[a-z].*'), {
-      message: 'At least one lowercase character',
-    })
-    .regex(new RegExp('.*\\d.*'), { message: 'At least one number' })
-    .min(8, { message: 'Password must be 8 or more characters long' })
-    .max(32, { message: 'Password must be a maximum of 32 characters long' }),
+  brandName: z.string().min(1, { message: '브랜드명을 입력해주세요.' }),
+  officialWebsite: z.string().min(1, { message: '공식 홈페이지 주소를 입력해주세요.' }),
+  companyProductInfo: z.string().min(1, { message: '상품소개 및 관련 내용을 입력해주세요.' }),
+  companyName: z.string().min(1, { message: '회사명을 입력해주세요.' }),
+  businessNumber: z.string().min(1, { message: '사업자 등록번호를 입력해주세요.' }),
+  businessAddress: z.string().min(1, { message: '사업장 주소를 입력해주세요.' }),
+  representativeName: z.string().min(1, { message: '대표자명을 입력해주세요.' }),
+  phoneNumber: z.string().min(1, { message: '전화번호를 입력해주세요.' }),
+  mobilePhoneNumber: z.string().min(1, { message: '휴대전화 번호를 입력해주세요.' }),
+  email: z.string().email({ message: '이메일 주소가 유효하지 않습니다.' }),
+  password: z.string().min(8, { message: '비밀번호를 8자리 이상 입력해주세요.' }),
+  confirmPassword: z.string().min(8, { message: '비밀번호 확인을 위해 8자리 이상 입력해주세요.' }),
+  businessLicenseNumber: z.string().min(1, { message: '통신 판매업 신고번호를 입력해주세요.' }),
+  openingDate: z.string().min(1, { message: '개업일자를 입력해주세요.' }),
+  businessCategory: z.string().min(1, { message: '사업체 분류를 입력해주세요.' }),
   isAgreed: z.boolean(),
 });
 
@@ -88,8 +98,8 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               color="info"
               inputClassName="text-sm"
-              {...register('firstName')}
-              error={errors.firstName?.message}
+              {...register('brandName')}
+              error={errors.brandName?.message}
             />
             <Input
               type="text"
@@ -99,8 +109,8 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               color="info"
               inputClassName="text-sm"
-              {...register('lastName')}
-              error={errors.lastName?.message}
+              {...register('officialWebsite')}
+              error={errors.officialWebsite?.message}
             />
             <Input
               type="text"
@@ -110,8 +120,8 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               color="info"
               inputClassName="text-sm"
-              {...register('lastName')}
-              error={errors.lastName?.message}
+              {...register('companyProductInfo')}
+              error={errors.companyProductInfo?.message}
             />
             <Input
               type="text"
@@ -121,8 +131,8 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               color="info"
               inputClassName="text-sm"
-              {...register('lastName')}
-              error={errors.lastName?.message}
+              {...register('companyName')}
+              error={errors.companyName?.message}
             />
             <Input
               type="text"
@@ -132,8 +142,8 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your pin"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('businessNumber')}
+              error={errors.businessNumber?.message}
             />
             <Input
               type="text"
@@ -143,8 +153,8 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your add"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('businessAddress')}
+              error={errors.businessAddress?.message}
             />
             <Input
               type="text"
@@ -153,9 +163,9 @@ export default function SignUpForm() {
               className="[&>label>span]:font-medium"
               inputClassName="text-sm"
               color="info"
-              placeholder="Enter your name"
-              {...register('email')}
-              error={errors.email?.message}
+              placeholder="Enter representative Name"
+              {...register('representativeName')}
+              error={errors.representativeName?.message}
             />
                         <Input
               type="number"
@@ -165,8 +175,8 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your number"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('phoneNumber')}
+              error={errors.phoneNumber?.message}
             />
                         <Input
               type="number"
@@ -176,8 +186,8 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your number"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('mobilePhoneNumber')}
+              error={errors.mobilePhoneNumber?.message}
             />
             <Input
               type="email"
@@ -208,10 +218,20 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your pin"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('businessLicenseNumber')}
+              error={errors.businessLicenseNumber?.message}
             />
-                        <Input
+            <Password
+              label="비밀번호 확인"
+              placeholder="비밀번호를 다시 한번 입력해주세요"
+              size="lg"
+              className="[&>label>span]:font-medium"
+              color="info"
+              inputClassName="text-sm"
+              {...register('confirmPassword')} // 'confirmPassword' 필드를 등록합니다.
+              error={errors.confirmPassword?.message} // 'confirmPassword' 필드의 에러를 표시합니다.
+            />
+            <Input
               type="date"
               size="lg"
               label="개업일자"
@@ -219,19 +239,8 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               color="info"
               placeholder="Enter your date"
-              {...register('email')}
-              error={errors.email?.message}
-            />
-                        <Input
-              type="text"
-              size="lg"
-              label="사업체 분류"
-              className="[&>label>span]:font-medium"
-              inputClassName="text-sm"
-              color="info"
-              placeholder="Enter your category"
-              {...register('email')}
-              error={errors.email?.message}
+              {...register('openingDate')}
+              error={errors.openingDate?.message}
             />           
             {/* <Password
               label="Confirm Password"
