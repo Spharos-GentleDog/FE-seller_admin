@@ -9,12 +9,15 @@ import { Title, Text } from '@/components/ui/text';
 import Link from 'next/link';
 import { Form } from '@/components/ui/form';
 import * as z from 'zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PiArrowRightBold } from 'react-icons/pi';
 import { routes } from '@/config/routes';
 import { SellerSignUpType } from 'types/seller/seller';
 import { Textarea } from 'rizzui';
 import FileUploadImage from '@/app/shared/file-upload_image';
+import Upload from '@/components/ui/upload';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const initialValues = {
   vendorEmail: '',
@@ -68,33 +71,53 @@ const signUpFormSchema = z.object({
 
 export default function SignUpForm() {
   const [reset, setReset] = useState({});
-
+  const router = useRouter();
   const onSubmit: SubmitHandler<SellerSignUpType> = async (data) => {
+
+    console.log(data);
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch(`${process.env.BASE_API_URL}api/v1/vendor/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          vendorEmail: data.vendorEmail,
+          businessNumber: data.businessNumber,
+          password: data.password,
+          mailOrderNumber: data.mailOrderNumber,
+          brandName: data.brandName,
+          brandLogoImageUrl: "http://test.com",
+          brandContent: data.brandContent,
+          homepageUrl: data.homepageUrl,
+          businessType: data.businessType,
+          companyName: data.companyName,
+          companyAddress: data.companyAddress,
+          openedAt: data.openedAt,
+          vendorName: data.brandName,
+          callCenterNumber: data.callCenterNumber,
+          managerName: data.managerName,
+          managerPhoneNumber: data.managerPhoneNumber
+        }),
       });
     
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error status:', response.status);
-        console.error('Error data:', errorData);
-        throw new Error('회원가입 요청에 실패했습니다.');
-      }
-    
-      const responseData = await response.json();
+      const responseData:any = await response.json();
       console.log(responseData);
+      if(responseData?.isSuccess) {
+        toast.success(
+          <Text>
+            회원가입이 완료되었습니다.
+          </Text>
+        )}
+
+        router.push('/signin')
     
-      setReset({ ...initialValues, isAgreed: false });
     } catch (error) {
       console.error(error);
+      setReset({ ...initialValues, isAgreed: false });
     }
   };
-  
+
   return (
     <>
       <Form<SellerSignUpType>
@@ -128,9 +151,14 @@ export default function SignUpForm() {
               {...register('homepageUrl')}
               error={errors.homepageUrl?.message}
             />
-            <div className='col-span-2'>
-              <FileUploadImage label = "회사로고 이미지"/>
-            </div>
+            
+              <FileUploadImage 
+                label = "회사로고 이미지"
+                className = "col-span-2"
+                multiple = {false}
+                {...register('brandLogoImageUrl')}
+              />
+           
             <Textarea
               size="lg"
               label="회사 상품소개 및 관련내용"

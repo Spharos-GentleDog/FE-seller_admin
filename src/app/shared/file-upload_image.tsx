@@ -21,6 +21,7 @@ import Upload from '@/components/ui/upload';
 import { useModal } from '@/app/shared/modal-views/use-modal';
 import SimpleBar from '@/components/ui/simplebar';
 import { toast } from 'react-hot-toast';
+import { set } from 'lodash';
 
 type AcceptedFiles = 'img' | 'pdf' | 'csv' | 'imgAndPdf' | 'all';
 
@@ -30,17 +31,19 @@ export default function FileUploadImage({
   fieldLabel,
   multiple = true,
   accept = 'all',
+  className,
 }: {
   label?: string;
   fieldLabel?: string;
   btnLabel?: string;
   multiple?: boolean;
   accept?: AcceptedFiles;
+  className?: string;
 }) {
   const { closeModal } = useModal();
 
   return (
-    <div className="m-auto pb-8 pt-5 @lg:pt-6 @2xl:px-7">
+    <div className={`m-auto pb-8 pt-5 @lg:pt-6 w-full ${className ? className : ''}`}>
       <div className="mb-6 flex items-center justify-between">
         <p className='-mb-3'>
           {label}
@@ -93,6 +96,7 @@ export const FileInput = ({
 }) => {
   const { closeModal } = useModal();
   const [files, setFiles] = useState<Array<File>>([]);
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
   const imageRef = useRef<HTMLInputElement>(null);
 
   function handleFileDrop(event: React.ChangeEvent<HTMLInputElement>) {
@@ -103,11 +107,13 @@ export const FileInput = ({
       })
       .filter((file) => file !== undefined);
     setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    setFileUrl(URL.createObjectURL(newFiles[0]));
   }
 
   function handleImageDelete(index: number) {
     const updatedFiles = files.filter((_, i) => i !== index);
     setFiles(updatedFiles);
+    setFileUrl(updatedFiles[0]?.name);
     (imageRef.current as HTMLInputElement).value = '';
   }
 
