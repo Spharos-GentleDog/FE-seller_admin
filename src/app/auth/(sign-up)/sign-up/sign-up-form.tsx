@@ -69,11 +69,32 @@ const signUpFormSchema = z.object({
 export default function SignUpForm() {
   const [reset, setReset] = useState({});
 
-  const onSubmit: SubmitHandler<SellerSignUpType> = (data) => {
-    console.log(data);
-    setReset({ ...initialValues, isAgreed: false });
+  const onSubmit: SubmitHandler<SellerSignUpType> = async (data) => {
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error status:', response.status);
+        console.error('Error data:', errorData);
+        throw new Error('회원가입 요청에 실패했습니다.');
+      }
+    
+      const responseData = await response.json();
+      console.log(responseData);
+    
+      setReset({ ...initialValues, isAgreed: false });
+    } catch (error) {
+      console.error(error);
+    }
   };
-
+  
   return (
     <>
       <Form<SellerSignUpType>
