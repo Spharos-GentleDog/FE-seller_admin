@@ -1,5 +1,4 @@
 'use client';
-
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Password } from '@/components/ui/password';
@@ -9,7 +8,7 @@ import { Title, Text } from '@/components/ui/text';
 import Link from 'next/link';
 import { Form } from '@/components/ui/form';
 import * as z from 'zod';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react'
 import { PiArrowRightBold } from 'react-icons/pi';
 import { routes } from '@/config/routes';
 import { SellerSignUpType } from 'types/seller/seller';
@@ -18,6 +17,7 @@ import FileUploadImage from '@/app/shared/file-upload_image';
 import Upload from '@/components/ui/upload';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import DaumPostcode from 'react-daum-postcode';
 
 const initialValues = {
   vendorEmail: '',
@@ -38,7 +38,6 @@ const initialValues = {
   managerName: '',
   managerPhoneNumber: ''
 };
-
 
 const signUpFormSchema = z.object({
   firstName: z.string().min(1, { message: 'First name is require' }),
@@ -71,12 +70,10 @@ const signUpFormSchema = z.object({
 
 export default function SignUpForm() {
   const [reset, setReset] = useState({});
-  const [imgUrl, setImgUrl] = useState<string>('');
   const router = useRouter();
   const onSubmit: SubmitHandler<SellerSignUpType> = async (data) => {
-    
+
     console.log(data);
-    console.log(imgUrl)
     try {
       const response = await fetch(`${process.env.BASE_API_URL}api/v1/vendor/signup`, {
         method: 'POST',
@@ -89,7 +86,7 @@ export default function SignUpForm() {
           password: data.password,
           mailOrderNumber: data.mailOrderNumber,
           brandName: data.brandName,
-          brandLogoImageUrl: imgUrl,
+          brandLogoImageUrl: "http://test.com",
           brandContent: data.brandContent,
           homepageUrl: data.homepageUrl,
           businessType: data.businessType,
@@ -110,21 +107,18 @@ export default function SignUpForm() {
           <Text>
             회원가입이 완료되었습니다.
           </Text>
-        )
+        )}
 
-        router.push('/')
-      } else {
-        toast.error(
-          <Text>
-            {responseData?.message}
-          </Text>
-        )
-      }
+        router.push('/signin')
     
     } catch (error) {
       console.error(error);
-      // setReset({ ...initialValues, isAgreed: false });
+      setReset({ ...initialValues, isAgreed: false });
     }
+  };
+
+  const handleClick = () => {
+    open(undefined as any);
   };
 
   return (
@@ -165,8 +159,7 @@ export default function SignUpForm() {
                 label = "회사로고 이미지"
                 className = "col-span-2"
                 multiple = {false}
-                setImgUrl = {setImgUrl}
-                // {...register('brandLogoImageUrl')}
+                {...register('brandLogoImageUrl')}
               />
            
             <Textarea
@@ -200,17 +193,25 @@ export default function SignUpForm() {
               {...register('businessNumber')}
               error={errors.businessNumber?.message}
             />
-            <Input
-              type="text"
-              size="lg"
-              label="사업장 주소"
-              className="[&>label>span]:font-medium"
-              inputClassName="text-sm"
-              color="info"
-              placeholder="Enter your add"
-              {...register('companyAddress')}
-              error={errors.companyAddress?.message}
-            />
+            <div className='flex-col'>
+              <Input
+                type="text"
+                size="lg"
+                label="사업장 주소"
+                className="[&>label>span]:font-medium"
+                inputClassName="text-sm"
+                color="info"
+                placeholder="Enter your add"
+                {...register('companyAddress')}
+                error={errors.companyAddress?.message}
+                />
+              <div className='flex-col w-full'>
+                <DaumPostcode className="" autoClose/>
+                <Button className="w-1/4 min-w-[110px]" onClick={handleClick}>
+                확인
+                </Button>
+              </div>
+            </div>
             <Input
               type="text"
               size="lg"
@@ -255,17 +256,6 @@ export default function SignUpForm() {
               {...register('vendorEmail')}
               error={errors.vendorEmail?.message}
             />
-            <Input
-              type="text"
-              size="lg"
-              label="통신 판매업 신고번호"
-              className="[&>label>span]:font-medium"
-              inputClassName="text-sm"
-              color="info"
-              placeholder="Enter your pin"
-              {...register('mailOrderNumber')}
-              error={errors.mailOrderNumber?.message}
-            />
             <Password
               label="Password"
               placeholder="Enter your password"
@@ -285,6 +275,17 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               {...register('password')}
               error={errors.password?.message}
+            />
+            <Input
+              type="text"
+              size="lg"
+              label="통신 판매업 신고번호"
+              className="[&>label>span]:font-medium"
+              inputClassName="text-sm"
+              color="info"
+              placeholder="Enter your pin"
+              {...register('mailOrderNumber')}
+              error={errors.mailOrderNumber?.message}
             />
             <Input
               type="date"
