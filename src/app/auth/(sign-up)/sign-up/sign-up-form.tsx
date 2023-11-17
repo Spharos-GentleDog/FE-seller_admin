@@ -71,10 +71,12 @@ const signUpFormSchema = z.object({
 
 export default function SignUpForm() {
   const [reset, setReset] = useState({});
+  const [imgUrl, setImgUrl] = useState<string>('');
   const router = useRouter();
   const onSubmit: SubmitHandler<SellerSignUpType> = async (data) => {
-
+    
     console.log(data);
+    console.log(imgUrl)
     try {
       const response = await fetch(`${process.env.BASE_API_URL}api/v1/vendor/signup`, {
         method: 'POST',
@@ -87,7 +89,7 @@ export default function SignUpForm() {
           password: data.password,
           mailOrderNumber: data.mailOrderNumber,
           brandName: data.brandName,
-          brandLogoImageUrl: "http://test.com",
+          brandLogoImageUrl: imgUrl,
           brandContent: data.brandContent,
           homepageUrl: data.homepageUrl,
           businessType: data.businessType,
@@ -108,13 +110,20 @@ export default function SignUpForm() {
           <Text>
             회원가입이 완료되었습니다.
           </Text>
-        )}
+        )
 
-        router.push('/signin')
+        router.push('/')
+      } else {
+        toast.error(
+          <Text>
+            {responseData?.message}
+          </Text>
+        )
+      }
     
     } catch (error) {
       console.error(error);
-      setReset({ ...initialValues, isAgreed: false });
+      // setReset({ ...initialValues, isAgreed: false });
     }
   };
 
@@ -156,7 +165,8 @@ export default function SignUpForm() {
                 label = "회사로고 이미지"
                 className = "col-span-2"
                 multiple = {false}
-                {...register('brandLogoImageUrl')}
+                setImgUrl = {setImgUrl}
+                // {...register('brandLogoImageUrl')}
               />
            
             <Textarea
@@ -245,6 +255,17 @@ export default function SignUpForm() {
               {...register('vendorEmail')}
               error={errors.vendorEmail?.message}
             />
+            <Input
+              type="text"
+              size="lg"
+              label="통신 판매업 신고번호"
+              className="[&>label>span]:font-medium"
+              inputClassName="text-sm"
+              color="info"
+              placeholder="Enter your pin"
+              {...register('mailOrderNumber')}
+              error={errors.mailOrderNumber?.message}
+            />
             <Password
               label="Password"
               placeholder="Enter your password"
@@ -264,17 +285,6 @@ export default function SignUpForm() {
               inputClassName="text-sm"
               {...register('password')}
               error={errors.password?.message}
-            />
-            <Input
-              type="text"
-              size="lg"
-              label="통신 판매업 신고번호"
-              className="[&>label>span]:font-medium"
-              inputClassName="text-sm"
-              color="info"
-              placeholder="Enter your pin"
-              {...register('mailOrderNumber')}
-              error={errors.mailOrderNumber?.message}
             />
             <Input
               type="date"
