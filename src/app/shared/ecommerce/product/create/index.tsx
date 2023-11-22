@@ -57,26 +57,25 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
   const [isLoading, setLoading] = useState(false);
   const [productImage, setProductImage] = useState<productCreateImageType[]>([]);
   const [detailImage, setDetailImage] = useState<productCreateImageType[]>([]);
-  console.log('product', product);
+
   const methods = useForm<CreateProductGentleInput>({
     defaultValues: defaultValues(product),
     resolver: zodResolver(productFormData),
   });
-
-  console.log('methods', methods.watch());
+      
   const session = useSession();
-  
-  useEffect(() => {
-    console.log('product', methods.watch());
-    console.log('productImage', productImage);
-  },[]);
 
   const onSubmit: SubmitHandler<CreateProductGentleInput> = () => {
 
-    const product = methods.watch();
-    console.log('productImage', productImage);
+
     console.log("inputdata", product);
     console.log(session?.data?.user.accessToken);
+    const pyaload = {
+      productImage: productImage,
+      detailImage: detailImage,
+    }
+
+    console.log('pyaload', pyaload);
     // fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`, {
     //   method: 'POST',
     //   headers: {

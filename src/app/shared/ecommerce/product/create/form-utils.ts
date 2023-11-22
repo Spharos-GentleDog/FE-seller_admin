@@ -96,18 +96,18 @@ export const mainImageUrl = {
 
 export function defaultValues(product?: CreateProductGentleInput) {
   return {
-    productName: product?.productName ?? '',
-    productPrice: product?.productPrice ?? '',
-    parentCategoryName: product?.parentCategoryName ?? '',
-    childCategoryName: product?.childCategoryName ?? '',
-    sizeName: product?.sizeName ?? [],
-    colorName: product?.colorName ?? [],
+    productName: '',
+    productPrice: '',
+    parentCategoryName: '',
+    childCategoryName: '',
+    sizeName: [],
+    colorName: [],
   };
 }
 
 export const productFormData = z.object({
   productName: z.string().min(1, { message: '필수 입력 값입니다.' }),
-  productPrice: z.string().regex(/^[0-9]+$/, { message: '숫자만 입력 가능합니다.' }).min(1, { message: '필수 입력 값입니다.' }),
+  productPrice: z.string().min(1, { message: '필수 입력 값입니다.' }),
   parentCategoryName: z.string().min(1, { message: '필수 입력 값입니다.' }),
   childCategoryName: z.string().optional(),
   sizeName: z.array(z.string()).optional(),

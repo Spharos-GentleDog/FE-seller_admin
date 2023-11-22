@@ -110,7 +110,7 @@ export default function ProductVariants({ className }: { className?: string }) {
                   key={item.value}
                   value={item.name}
                   onChange={onChange}
-                  checked={sizeName.length > 0 && sizeName.includes(item.name as never)}
+                  checked={sizeName.length > 0 && sizeName.find(item.name)}
                   className="flex justify-between gap-2 rounded-xl border border-gray-200 p-6 text-gray-600 hover:cursor-pointer hover:border-gray-700"
                   inputClassName="[&:checked:enabled~span]:ring-1 [&:checked:enabled~span]:ring-offset-0 [&:checked:enabled~span]:ring-gray-700 [&:checked:enabled~span]:border-gray-700 [&:checked~span>.icon]:block"
                 >
@@ -121,6 +121,7 @@ export default function ProductVariants({ className }: { className?: string }) {
             </CheckboxGroup>
           )}
         />
+        {errors.sizeName?.message as string}
       </div>
     </FormGroup>
     <FormGroup
@@ -154,6 +155,7 @@ export default function ProductVariants({ className }: { className?: string }) {
             </CheckboxGroup>
           )}
         />
+        {errors.colorName?.message as string}
       </div>
     </FormGroup>
     </>

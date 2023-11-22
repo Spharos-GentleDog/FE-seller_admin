@@ -123,8 +123,7 @@ export default function ProductSummary({ className }: { className?: string }) {
         name="parentCategoryName"
         control={control}
         render={({ field: { onChange, value, name } }) => {
-          console.log(value, parentCategoryOption?.findLast((item) => item.name === value)?.value)
-          setParentCateId(parentCategoryOption?.findLast((item) => item.name === value)?.value)
+          setParentCateId(parentCategoryOption?.find((item) => item.name === value)?.value || 0)
           return(
           <Select
             options={parentCategoryOption ? parentCategoryOption : []}
