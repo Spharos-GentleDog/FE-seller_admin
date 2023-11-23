@@ -64,7 +64,6 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
   });
       
   const session = useSession();
-
   const onSubmit: SubmitHandler<CreateProductGentleInput> = () => {
 
 
@@ -73,6 +72,7 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
     const pyaload = {
       productImage: productImage,
       detailImage: detailImage,
+
     }
 
     console.log('pyaload', pyaload);
