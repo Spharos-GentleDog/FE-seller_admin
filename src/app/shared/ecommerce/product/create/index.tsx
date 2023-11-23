@@ -64,7 +64,6 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
   });
       
   const session = useSession();
-
   const onSubmit: SubmitHandler<CreateProductGentleInput> = () => {
 
     const data = methods.getValues();
